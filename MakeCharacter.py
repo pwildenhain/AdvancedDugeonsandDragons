@@ -28,7 +28,7 @@ if answer == 'yes':
     print('*Fingers crossed*')
     re.redo_loop(roll.roll_stats,'Want to keep these numbers?')
     tp.typeit('Great! Let\'s assign these stats.')
-    re.redo_loop(assign.assign_stats,'Are these choices correct?')  
+    re.redo_loop(assign.assign_stats,'Are these choices correct?')
 elif answer == 'no':
     tp.typeit('Sounds good.')
     tp.typeit('Enter below and don\'t adjust for race, we\'ll handle that next.')
@@ -48,7 +48,7 @@ lim.race_lim_loop()
 if csg.stats_chosen_dict['S'] == 18:
     tp.typeit('Woah, you are strong like bull with that 18 strength. Here\'s the percentile for that.')
     re.redo_loop(str18.str_18_roll,'Want to keep that percentage?')
-    sleep(0.5)               
+    sleep(0.5)
 tp.typeit('Moving right along--Let\'s pick a class')
 sleep(0.5)
 ##############################Look into tests for my modules
@@ -89,6 +89,6 @@ sleep(0.5)
 #############################Choose Alignment, gender, religion,name,traits and other misc things that don't effect the char sheet
 #############################it would be nice for the messages to be a little more random, throughout and not just the same every time
 
-        
 
-    
+
+
