@@ -10,6 +10,7 @@ import lib.rollstats as roll
 import lib.assignstats as assign
 import lib.adjuststats as adjust
 import lib.pickrace as race
+import lib.picksex as sex
 import lib.str18 as str18
 ##############################Introduction
 tp.typeit('Oh boy a new character!')
@@ -36,15 +37,17 @@ elif answer == 'no':
 sleep(0.5)
 tp.typeit('Awesome. Now let\'s choose a race.')
 sleep(0.5)
-##############################Choose race
+##############################Choose race + sex
 re.redo_loop(race.pick_race,'Is that your final answer?')
+re.redo_loop(sex.pick_sex,'You sure?')
 #Adjusted stats based on race
 adjust.adjust_stats()
 #is there a limitation?
-lim.check_race_lim()
+lim.check_racesex_lim()
 #if so, allow them to choose what to do next.
-lim.race_lim_loop()
-#Roll percentiles if they have an 18 strength
+lim.racesex_lim_loop()
+#Roll or enter percentiles if they have an 18 strength
+########################################################need to add option to roll or enter
 if csg.stats_chosen_dict['S'] == 18:
     tp.typeit('Woah, you are strong like bull with that 18 strength. Here\'s the percentile for that.')
     re.redo_loop(str18.str_18_roll,'Want to keep that percentage?')

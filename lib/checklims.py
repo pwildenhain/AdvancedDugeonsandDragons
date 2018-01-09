@@ -10,42 +10,53 @@ import lib.typeit as tp
 import lib.charSheetGlobals as csg
 import lib.redo as re
 import lib.pickrace as race
+import lib.picksex as sex
 import lib.assignstats as assign
 import lib.adjuststats as adjust
 from time import sleep
 #function to test limits by race
-def check_race_lim():
+def check_racesex_lim():
     csg.has_limit = ''
     for stat in range(6):
-        if csg.stats_chosen_dict[csg.stat_blocks[stat]] not in csg.race_limits[csg.race][csg.stat_blocks[stat]]:
-            tp.typeit(csg.race.capitalize() + ' ' + csg.stat_names[stat] + ' techincally can\'t be ' + str(csg.stats_chosen_dict[csg.stat_blocks[stat]]))
-            sleep(0.5)
-            csg.has_limit = 'yes'
+        if stat == 0:
+            if csg.stats_chosen_dict[csg.stat_blocks[stat]] not in csg.racesex_limits[csg.race][csg.stat_blocks[stat]][csg.sex]:
+                tp.typeit(csg.sex.capitalize() + ' ' + csg.race.capitalize() + ' ' + csg.stat_names[stat] + ' techincally can\'t be ' + str(csg.stats_chosen_dict[csg.stat_blocks[stat]]))
+                sleep(0.5)
+                csg.has_limit = 'yes'
+        else:
+            if csg.stats_chosen_dict[csg.stat_blocks[stat]] not in csg.racesex_limits[csg.race][csg.stat_blocks[stat]]:
+                tp.typeit(csg.race.capitalize() + ' ' + csg.stat_names[stat] + ' techincally can\'t be ' + str(csg.stats_chosen_dict[csg.stat_blocks[stat]]))
+                sleep(0.5)
+                csg.has_limit = 'yes'
 
-def race_lim_loop():
+def racesex_lim_loop():
     while csg.has_limit == 'yes':
         tp.typeit('What would you like to do:')
         tp.typeit('a) continue')
-        tp.typeit('b) pick another race')
-        tp.typeit('c) re-assign stats')
+        tp.typeit('b) pick another sex')
+        tp.typeit('c) pick another race')
+        tp.typeit('d) re-assign stats')
         answer = ''
         answer = input().lower()
-        while not answer in ['a','b','c']:
+        while not answer in ['a','b','c','d']:
             tp.typeit('Please type a, b, or c')
             answer = input().lower()
         if answer == 'a':
             csg.has_limit = 'no'
         elif answer == 'b':
+            re.redo_loop(sex.pick_sex,'You sure?')
+            check_racesex_lim()
+        elif answer == 'c':
             re.redo_loop(race.pick_race,'Is that your final answer?')
             adjust.adjust_stats()
-            check_race_lim()
-        elif answer == 'c':
+            check_racesex_lim()
+        elif answer == 'd':
             re.redo_loop(assign.assign_stats,'Are these choices correct?')
             adjust.adjust_stats()
-            check_race_lim()
-                
-            
-            
-        
-        
+            check_racesex_lim()
+
+
+
+
+
 
