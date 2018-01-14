@@ -1,61 +1,62 @@
-##############################Imports and functions
+##############################Imports
+#standard modules
 from time import sleep
-import lib.charSheetGlobals as csg
-import lib.typeit as tp
-import lib.redo as re
-import lib.checklims as lim
-#Main functions for the module
-import lib.pickstats as pick
-import lib.rollstats as roll
-import lib.assignstats as assign
-import lib.adjuststats as adjust
-import lib.pickrace as race
-import lib.picksex as sex
-import lib.str18 as str18
+from functools import partial
+#data model module
+from model.player_character import PlayerCharacter
+#utility function modules
+from utility.typeit import type_it
+from utility.redo import redo_loop
 ##############################Introduction
-tp.typeit('Oh boy a new character!')
+NewCharacter = PlayerCharacter()
+type_it('Oh boy a new character!')
 sleep(0.5)
 ##############################Do the initial roll and assign stats
-tp.typeit('Would you like me to roll your stats for you?')
+type_it('Would you like me to roll your stats for you?')
 answer = ''
 answer = input().lower()
 #get a yes or no answer
 while not answer in ['yes','no']:
-    tp.typeit('Please type "yes" or "no"')
-    answer = input().lower()
+	type_it('Please type "yes" or "no"')
+	answer = input().lower()
 #roll/assign or pick their stats
 if answer == 'yes':
-    tp.typeit('Ok, here we go!')
-    print('*Fingers crossed*')
-    re.redo_loop(roll.roll_stats,'Want to keep these numbers?')
-    tp.typeit('Great! Let\'s assign these stats.')
-    re.redo_loop(assign.assign_stats,'Are these choices correct?')
+	type_it('Ok, here we go!')
+	print('*Fingers crossed*')
+	redo_loop(NewCharacter.roll_stats,'Want to keep these numbers?',show_func = NewCharacter.show_rolled_stats)
+	redo_loop(partial(NewCharacter.assign_stats,type_it),'Are these choices correct?',show_func = NewCharacter.show_assigned_stats)
 elif answer == 'no':
-    tp.typeit('Sounds good.')
-    tp.typeit('Enter below and don\'t adjust for race, we\'ll handle that next.')
-    re.redo_loop(pick.pick_stats,'Are these the numbers you want?')
+	type_it('Sounds good.')
+	type_it('Enter below and don\'t adjust for race, we\'ll handle that next.')
+	redo_loop(partial(NewCharacter.pick_stats,type_it),'Are these the numbers you want?',show_func = NewCharacter.show_picked_stats)
 sleep(0.5)
-tp.typeit('Awesome. Now let\'s choose a race.')
+type_it('Awesome. Now let\'s choose a race.')
 sleep(0.5)
 ##############################Choose race + sex
-re.redo_loop(race.pick_race,'Is that your final answer?')
-re.redo_loop(sex.pick_sex,'You sure?')
-#Adjusted stats based on race
-adjust.adjust_stats()
-#is there a limitation?
-lim.check_racesex_lim()
+#choices are distinct enough, no need to ask for confirmation
+NewCharacter.pick_race(type_it)
+NewCharacter.pick_sex(type_it)
+#Create the stats dictionary and adjust stats based on race
+NewCharacter.adjust_stats()
+if NewCharacter.adjust_stat_nums == True:
+	type_it('You get some perks! Here\'s a peek at your adjusted stats.') 
+	type_it(NewCharacter.show_adjusted_stats()) 
+#is there a race/sex limitation?
+NewCharacter.check_racesex_lim(type_it)
 #if so, allow them to choose what to do next.
-lim.racesex_lim_loop()
-#Roll or enter percentiles if they have an 18 strength
-########################################################need to add option to roll or enter
-if csg.stats_chosen_dict['S'] == 18:
-    tp.typeit('Woah, you are strong like bull with that 18 strength. Here\'s the percentile for that.')
-    re.redo_loop(str18.str_18_roll,'Want to keep that percentage?')
-    sleep(0.5)
-tp.typeit('Moving right along--Let\'s pick a class')
-sleep(0.5)
+NewCharacter.racesex_lim_loop(type_it)
+#give/ask them for their str percentile, if they have 18 strength
+if NewCharacter.stats_chosen_dict['S'] == 18:
+	type_it('Woah there, you are strong like bull with that 18 strength!')
+	type_it('Would you like me to roll the percentile for you?')
+	answer = input().lower()
+	#get a yes or no answer
+	while not answer in ['yes','no']:
+		type_it('Please type "yes" or "no"')
+		answer = input().lower()
+	NewCharacter.str_18(answer,type_it)
+#need to build checklim funcs for str percentile, after I check the overall str
 ##############################Look into tests for my modules
-##############################Edit the stats pick to only allow range(1,31)
 ##############################Building in controls for limitations set by gary gygax, by race,class
 #   Only offer to go back so many steps. i.e If you hit a level limit don't allow them to re-roll stats
 #   race limitations: to be checked during pick_race, right after they choose.
@@ -65,9 +66,10 @@ sleep(0.5)
 #       by ability score (min and max for each ability)
 #       by race (true or false for each race/class combo)
 #       dict stored in charSheetGlobals
-#   weapon/armor prof:?
+# multiclass: levels need to be no more than 1 apart for non humans multiclass, humans can only have two classes
 #   levels?
 #       by race and class
+#   weapon/armor prof:?
 ##############################Choose class/classes
 #   this needs to be dynamic, and will define
 #   the structure of all the other functions moving forward
@@ -91,7 +93,3 @@ sleep(0.5)
 ##############################Spells/Skills
 #############################Choose Alignment, gender, religion,name,traits and other misc things that don't effect the char sheet
 #############################it would be nice for the messages to be a little more random, throughout and not just the same every time
-
-
-
-
