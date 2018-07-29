@@ -159,7 +159,7 @@ class PlayerCharacter(object):
                 self.race = 'half-elf'
                 break
             else:
-                func('Hmmm I didn\'t catch that')
+                func("Hmmm I didn't catch that")
                 sleep(1.5)
                 continue
     def pick_sex(self,func): 
