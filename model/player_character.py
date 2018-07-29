@@ -218,7 +218,6 @@ class PlayerCharacter(object):
             func('b) pick another sex')
             func('c) pick another race')
             func('d) re-assign stats')
-            answer = ''
             answer = input().lower()
             while not answer in ['a','b','c','d']:
                 func('Please type a, b, or c')
@@ -232,7 +231,7 @@ class PlayerCharacter(object):
                 self.pick_race(func)
                 self.adjust_stats()
                 if self.adjust_stat_nums == True:
-                    func('You get some perks! Here\'s a peek at your adjusted stats.') 
+                    func("You get some perks! Here's a peek at your adjusted stats.") 
                     func(self.show_adjusted_stats())                
                 self.check_racesex_lim(func)
             elif answer == 'd':
@@ -240,7 +239,7 @@ class PlayerCharacter(object):
                 func(self.show_assigned_stats())
                 self.adjust_stats()
                 if self.adjust_stat_nums == True:
-                    func('Here\'s a peek at your adjusted stats.')
+                    func("Here's a peek at your adjusted stats.")
                     func(self.show_adjusted_stats())
                 self.check_racesex_lim(func)
     def str_18(self,answer,func):
