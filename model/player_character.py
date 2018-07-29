@@ -94,7 +94,6 @@ class PlayerCharacter(object):
         self.all_stats_ordered = []
         for stat in range(6):
             stat = self.stat_names[stat]
-            # stat_names exists in charSheetGlobals for reference
             func(f'Enter a number for {stat}: ')
             while True:
                 try: 
@@ -204,7 +203,7 @@ class PlayerCharacter(object):
                 strength_lim = self.racesex_limits[self.race][self.stat_blocks[stat]][self.sex]
                 if stat_score not in strength_lim:
                     sex = self.sex.capitalize()
-                    func(f"{sex} {race} {stat}  techincally can't be " + str(strength_score))
+                    func(f"{sex} {race} {stat}  techincally can't be " + str(stat_score))
                     sleep(0.5)
                     self.has_limit = True
             else:
