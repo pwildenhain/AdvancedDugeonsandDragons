@@ -194,7 +194,7 @@ class PlayerCharacter(object):
                 self.stats_chosen_dict['C'] = self.stats_chosen_dict['C'] + 1
                 self.stats_chosen_dict['Ch'] = self.stats_chosen_dict['Ch'] - 2
     def show_adjusted_stats(self): 
-        return ", ".join("{}: {}".format(stat, num) for stat, num in self.stats_chosen_dict.items())
+        return ", ".join(f"{stat}: {num}" for stat, num in self.stats_chosen_dict.items())
     def check_racesex_lim(self,func):
         self.has_limit = False
         for stat in range(6):
