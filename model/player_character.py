@@ -15,8 +15,9 @@ class PlayerCharacter(object):
         sex:
         has_limit:
     """
-    def __init__(self, all_stats  = [], all_stats_ordered = [], stats_chosen_dict = {}, str_percentile = 0, race = '', sex = '', adjust_stat_nums = False, has_limit = '',
-                 stat_names = [], stat_blocks = [], race_list = [], sex_list = [], racesex_limits = {}):
+    def __init__(self, all_stats  = [], all_stats_ordered = [], stats_chosen_dict = {}, str_percentile = 0,
+                 race = '', sex = '', adjust_stat_nums = False, has_limit = '', stat_names = [],
+                 stat_blocks = [], race_list = [], sex_list = [], racesex_limits = {}):
         """Return a PlayerCharacter object with all empty attributes"""
         self.all_stats = all_stats
         self.all_stats_ordered = all_stats_ordered
@@ -26,53 +27,53 @@ class PlayerCharacter(object):
         self.sex = sex
         self.adjust_stat_nums = adjust_stat_nums
         self.has_limit = has_limit
-        self.stat_names = ['Strength','Dexterity','Constitution','Intelligence','Wisdom','Charisma']
+        self.stat_names = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']
         self.stat_blocks = ['S','D','C','I','W','Ch']
-        self.race_list = ['dwarf','elf','gnome','half-elf','halfling','half-orc','human']
-        self.sex_list = ['male','female']
+        self.race_list = ['dwarf', 'elf', 'gnome', 'half-elf', 'halfling', 'half-orc', 'human']
+        self.sex_list = ['male', 'female']
         self.racesex_limits = {
-                'dwarf' : {'S':{'male':range(8,19), 'female':range(8,18)}, #'Sper':{'male':range(100),'female':range(0)},
-                          'D':range(3,18),
-                          'C':range(12,26),
-                          'I':range(3,26),
-                          'W':range(3,26),
-                          'Ch':range(3,17)},
-               'elf' : {'S':{'male':range(3,19), 'female':range(3,17)}, #'Sper':{'male':range(76), 'female':range(0)},
-                          'D':range(7,26),
-                          'C':range(6,26),
-                          'I':range(8,26),
-                          'W':range(3,26),
-                          'Ch':range(8,26)},
-               'gnome' : {'S':{'male':range(6,19), 'female':range(6,16)}, #'Sper':{'male':range(51), 'female':range(0)},
-                          'D':range(3,26),
-                          'C':range(8,26),
-                          'I':range(7,26),
-                          'W':range(3,26),
-                          'Ch':range(3,26)},
-               'half-elf' : {'S':{'male':range(3,19), 'female':range(3,18)}, #'Sper':{'male':range(91),'female':range(0)},
-                          'D':range(6,26),
-                          'C':range(6,26),
-                          'I':range(4,26),
-                          'W':range(3,26),
-                          'Ch':range(3,26)},
-               'halfling' : {'S':{'male':range(6,18), 'female':range(6,15)}, #'Sper':{'male':range(0),'female':range(0)},
-                          'D':range(8,26),
-                          'C':range(10,26),
-                          'I':range(6,26),
-                          'W':range(3,18),
-                          'Ch':range(3,26)},
-               'half-orc' : {'S':{'male':range(6,19), 'female':range(6,19)}, #'Sper':{'male':range(100), 'female':range(76)},
-                          'D':range(3,15),
-                          'C':range(13,26),
-                          'I':range(3,18),
-                          'W':range(3,15),
-                          'Ch':range(3,13)},
-               'human' : {'S':{'male':range(3,26), 'female':range(3,26)}, #'Sper':{'male':range(101),'female':range(51)},
-                          'D':range(3,26),
-                          'C':range(3,26),
-                          'I':range(3,26),
-                          'W':range(3,26),
-                          'Ch':range(3,26)}
+                'dwarf' : {'S':{'male':range(8, 19), 'female':range(8, 18)}, #'Sper':{'male':range(100),'female':range(0)},
+                          'D':range(3, 18),
+                          'C':range(12, 26),
+                          'I':range(3, 26),
+                          'W':range(3, 26),
+                          'Ch':range(3, 17)},
+               'elf' : {'S':{'male':range(3, 19), 'female':range(3, 17)}, #'Sper':{'male':range(76), 'female':range(0)},
+                          'D':range(7, 26),
+                          'C':range(6, 26),
+                          'I':range(8, 26),
+                          'W':range(3, 26),
+                          'Ch':range(8, 26)},
+               'gnome' : {'S':{'male':range(6, 19), 'female':range(6, 16)}, #'Sper':{'male':range(51), 'female':range(0)},
+                          'D':range(3, 26),
+                          'C':range(8, 26),
+                          'I':range(7, 26),
+                          'W':range(3, 26),
+                          'Ch':range(3, 26)},
+               'half-elf' : {'S':{'male':range(3, 19), 'female':range(3, 18)}, #'Sper':{'male':range(91),'female':range(0)},
+                          'D':range(6, 26),
+                          'C':range(6, 26),
+                          'I':range(4, 26),
+                          'W':range(3, 26),
+                          'Ch':range(3, 26)},
+               'halfling' : {'S':{'male':range(6, 18), 'female':range(6, 15)}, #'Sper':{'male':range(0),'female':range(0)},
+                          'D':range(8, 26),
+                          'C':range(10 ,26),
+                          'I':range(6, 26),
+                          'W':range(3, 18),
+                          'Ch':range(3, 26)},
+               'half-orc' : {'S':{'male':range(6, 19), 'female':range(6, 19)}, #'Sper':{'male':range(100), 'female':range(76)},
+                          'D':range(3, 15),
+                          'C':range(13, 26),
+                          'I':range(3, 18),
+                          'W':range(3, 15),
+                          'Ch':range(3, 13)},
+               'human' : {'S':{'male':range(3, 26), 'female':range(3, 26)}, #'Sper':{'male':range(101),'female':range(51)},
+                          'D':range(3, 26),
+                          'C':range(3, 26),
+                          'I':range(3, 26),
+                          'W':range(3, 26),
+                          'Ch':range(3, 26)}
                }
     def roll_stats(self):
         """Roll the initial stats for the PlayerCharacter, and then assign it to the all_stats attribute"""
@@ -81,14 +82,14 @@ class PlayerCharacter(object):
         for result in range(6):
             all_dice = []
             for d6 in range(4):
-                d6 = randint(1,6)
-                all_dice.insert(0,d6)
+                d6 = randint(1, 6)
+                all_dice.insert(0, d6)
                 min_roll = min(int(die) for die in all_dice)
                 result = sum(all_dice) - min_roll
             self.all_stats.append(result)
     def show_rolled_stats(self):
         return ", ".join([str(num) for num in self.all_stats])
-    def pick_stats(self,func):
+    def pick_stats(self, func):
         """Directly assign the initial stats for the PlayerCharacter in order, and then assign it to the all_stats_ordered attribute"""
         # Empty the list in case there are previous results
         self.all_stats_ordered = []
@@ -98,7 +99,7 @@ class PlayerCharacter(object):
             while True:
                 try: 
                     choice = int(input())
-                    if choice not in range(3,26):
+                    if choice not in range(3, 26):
                         func(f'Just integers between 3 and 25 for now. Enter a number for {stat}: ')
                         continue
                     else:
@@ -108,7 +109,7 @@ class PlayerCharacter(object):
                     func(f'Whoops, integers only please. Enter a number for {stat}: ')
                     continue
         self.all_stats = self.all_stats_ordered
-    def assign_stats(self,func):
+    def assign_stats(self, func):
         self.all_stats_ordered = []
         all_stats_unordered = list(self.all_stats)
         stat = 0
@@ -130,11 +131,11 @@ class PlayerCharacter(object):
                 except ValueError:
                     func(f'Numbers only please. Choose {stat_name} from these values: {available_stats}')
                     continue
-                # Move on to next stat
+            # Move on to next stat
             stat = stat + 1
         # If all the values in all_stats_unordered are the same, then assign the rest automatically        
         for stat in range(len(all_stats_unordered)):
-            self.all_stats_ordered.insert(5,all_stats_unordered[stat])
+            self.all_stats_ordered.insert(5, all_stats_unordered[stat])
     def show_assigned_stats(self):
         assigned_stats = []
         for stat in range(6):
@@ -142,7 +143,7 @@ class PlayerCharacter(object):
             stat_num = str(self.all_stats_ordered[stat])
             assigned_stats.append(f'{stat_name}: {stat_num}')
         return ", ".join(assigned_stats)
-    def pick_race(self,func): 
+    def pick_race(self, func): 
         while True: 
             func('Pick a race from the following list:') 
             func(", ".join(self.race_list))
@@ -159,7 +160,7 @@ class PlayerCharacter(object):
                 func("Hmmm I didn't catch that")
                 sleep(1.5)
                 continue
-    def pick_sex(self,func): 
+    def pick_sex(self, func): 
         while True: 
             func('Would you like to play a male or female character?')
             self.sex = input().lower()
@@ -175,7 +176,7 @@ class PlayerCharacter(object):
         # reset our "has adjusted stats" variable, in case we loop back through
         self.adjust_stat_nums = False
         # Then adjust for new race if appropriate
-        if self.race in ['dwarf','elf','halfling','half-orc']:
+        if self.race in ['dwarf', 'elf', 'halfling', 'half-orc']:
             self.adjust_stat_nums = True
             if self.race == 'dwarf':
                 self.stats_chosen_dict['C'] = self.stats_chosen_dict['C'] + 1
@@ -192,7 +193,7 @@ class PlayerCharacter(object):
                 self.stats_chosen_dict['Ch'] = self.stats_chosen_dict['Ch'] - 2
     def show_adjusted_stats(self): 
         return ", ".join(f"{stat}: {num}" for stat, num in self.stats_chosen_dict.items())
-    def check_racesex_lim(self,func):
+    def check_racesex_lim(self, func):
         self.has_limit = False
         for stat in range(6):
             stat_score = self.stats_chosen_dict[self.stat_blocks[stat]]
@@ -211,7 +212,7 @@ class PlayerCharacter(object):
                     func(f"{race} {stat}  techincally can't be " + str(stat_score))
                     sleep(0.5)
                     self.has_limit = True
-    def racesex_lim_loop(self,func):
+    def racesex_lim_loop(self, func):
         while self.has_limit == True:
             func('What would you like to do:')
             func('a) continue')
@@ -242,7 +243,7 @@ class PlayerCharacter(object):
                     func("Here's a peek at your adjusted stats.")
                     func(self.show_adjusted_stats())
                 self.check_racesex_lim(func)
-    def str_18(self,answer,func):
+    def str_18(self, answer, func):
         if answer == 'yes': 
             str_percentile = randint(1,100)
         elif answer == 'no':
@@ -250,7 +251,7 @@ class PlayerCharacter(object):
                 func('Enter a number for your Strength Percentile:')
                 try: 
                     str_percentile = int(input())
-                    if str_percentile not in range(1,101): 
+                    if str_percentile not in range(1, 101): 
                         func('Hmmm, only integers between 1 and 100 are accepted.')
                         continue
                     else:
