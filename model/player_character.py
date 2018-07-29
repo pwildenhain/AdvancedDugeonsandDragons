@@ -169,7 +169,7 @@ class PlayerCharacter(object):
             if self.sex in self.sex_list:
                 break
             else:
-                func('That\'s not an option here...')
+                func("That's not an option here...")
                 sleep(1.5)
                 continue
     def adjust_stats(self):
