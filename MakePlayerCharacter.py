@@ -1,25 +1,24 @@
-##############################Imports
-#standard modules
+############################## Imports
+# Standard modules
 from time import sleep
 from functools import partial
-#data model module
+# Data model module
 from model.player_character import PlayerCharacter
-#utility function modules
+# Utility function modules
 from utility.typeit import type_it
 from utility.redo import redo_loop
-##############################Introduction
+############################## Introduction
 NewCharacter = PlayerCharacter()
 type_it('Oh boy a new character!')
 sleep(0.5)
-##############################Do the initial roll and assign stats
+############################## Do the initial roll and assign stats
 type_it('Would you like me to roll your stats for you?')
 answer = ''
 answer = input().lower()
-#get a yes or no answer
 while not answer in ['yes','no']:
 	type_it('Please type "yes" or "no"')
 	answer = input().lower()
-#roll/assign or pick their stats
+# Roll/assign or pick their stats
 if answer == 'yes':
 	type_it('Ok, here we go!')
 	print('*Fingers crossed*')
@@ -39,25 +38,24 @@ elif answer == 'no':
 sleep(0.5)
 type_it('Awesome. Now let\'s choose a race.')
 sleep(0.5)
-##############################Choose race + sex
-#choices are distinct enough, no need to ask for confirmation
+############################## Choose race + sex
+# Choices are distinct enough, no need to ask for redo_loop()
 NewCharacter.pick_race(type_it)
 NewCharacter.pick_sex(type_it)
-#Create the stats dictionary and adjust stats based on race
+# Create the stats dictionary and adjust stats based on race
 NewCharacter.adjust_stats()
 if NewCharacter.adjust_stat_nums == True:
 	type_it('You get some perks! Here\'s a peek at your adjusted stats.') 
 	type_it(NewCharacter.show_adjusted_stats()) 
-#is there a race/sex limitation?
+# Is there a race/sex limitation?
 NewCharacter.check_racesex_lim(type_it)
-#if so, allow them to choose what to do next.
+# If so, allow them to choose what to do next.
 NewCharacter.racesex_lim_loop(type_it)
-#give/ask them for their str percentile, if they have 18 strength
+# Give/ask them for their str percentile, if they have 18 strength
 if NewCharacter.stats_chosen_dict['S'] == 18:
 	type_it('Woah there, you are strong like bull with that 18 strength!')
 	type_it('Would you like me to roll the percentile for you?')
 	answer = input().lower()
-	#get a yes or no answer
 	while not answer in ['yes','no']:
 		type_it('Please type "yes" or "no"')
 		answer = input().lower()
