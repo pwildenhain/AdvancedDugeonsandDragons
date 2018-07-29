@@ -1,7 +1,7 @@
-##############################Imports
+# Imports
 from time import sleep
 from random import randint
-##############################Define the Player Character Classification
+# Define the Player Character Classification
 class PlayerCharacter(object):
     """The character to be created for playing Advanced Dungeons and Dragons
        with the following properties:
@@ -76,7 +76,7 @@ class PlayerCharacter(object):
                }
     def roll_stats(self):
         """Roll the initial stats for the PlayerCharacter, and then assign it to the all_stats attribute"""
-        #Empty the list in case there are previous results
+        # Empty the list in case there are previous results
         self.all_stats = []
         for stat in range(6):
             all_dice = []
@@ -90,10 +90,10 @@ class PlayerCharacter(object):
         return ", ".join([str(num) for num in self.all_stats])
     def pick_stats(self,func):
         """Directly assign the initial stats for the PlayerCharacter in order, and then assign it to the all_stats_ordered attribute"""
-        #Empty the list in case there are previous results
+        # Empty the list in case there are previous results
         self.all_stats_ordered = []
         for stat in range(6):
-            #stat_names exists in charSheetGlobals for reference
+            # stat_names exists in charSheetGlobals for reference
             func('Enter a number for ' + self.stat_names[stat] + ': ')
             while True:
                 try: 
@@ -117,7 +117,7 @@ class PlayerCharacter(object):
         self.all_stats_ordered = []
         all_stats_unordered = list(self.all_stats)
         stat = 0
-        #Check to make sure all the values in all_stats_unordered are unique
+        # Check to make sure all the values in all_stats_unordered are unique
         while all(x==all_stats_unordered[0] for x in all_stats_unordered)==False:
             func('Pick a number for ' + self.stat_names[stat] + ': ' + ", ".join([str(num) for num in all_stats_unordered]))
             while True:
@@ -133,9 +133,9 @@ class PlayerCharacter(object):
                 except ValueError:
                     func('Numbers only please. Choose ' + self.stat_names[stat] + ' from these values:' + ", ".join([str(num) for num in all_stats_unordered]))
                     continue
-                #Move on to next stat
+                # Move on to next stat
             stat = stat + 1
-        #If all the values in all_stats_unordered are the same, then assign the rest automatically        
+        # If all the values in all_stats_unordered are the same, then assign the rest automatically        
         for stat in range(len(all_stats_unordered)):
             self.all_stats_ordered.insert(5,all_stats_unordered[stat])
     def show_assigned_stats(self):
@@ -171,11 +171,11 @@ class PlayerCharacter(object):
                 sleep(1.5)
                 continue
     def adjust_stats(self):
-        #Create the stat dict here, in case we choose a new race
+        # Create the stat dict here, in case we choose a new race
         self.stats_chosen_dict = dict(zip(self.stat_blocks,self.all_stats_ordered))
-        #reset our "has adjusted stats" variable, in case we loop back through
+        # reset our "has adjusted stats" variable, in case we loop back through
         self.adjust_stat_nums = False
-        #Then adjust for new race if appropriate
+        # Then adjust for new race if appropriate
         if self.race in ['dwarf','elf','halfling','half-orc']:
             self.adjust_stat_nums = True
             if self.race == 'dwarf':
