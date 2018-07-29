@@ -78,7 +78,7 @@ class PlayerCharacter(object):
         """Roll the initial stats for the PlayerCharacter, and then assign it to the all_stats attribute"""
         # Empty the list in case there are previous results
         self.all_stats = []
-        for stat in range(6):
+        for result in range(6):
             all_dice = []
             for d6 in range(4):
                 d6 = randint(1,6)
@@ -109,10 +109,7 @@ class PlayerCharacter(object):
                     func(f'Whoops, integers only please. Enter a number for {stat}: ')
                     continue
         self.all_stats = self.all_stats_ordered 
-    def show_picked_stats(self):
-        picked_stats = []
-        for stat in range(6):
-            picked_stats.append(self.stat_blocks[stat] + ': ' + str(self.all_stats_ordered[stat]))
+
         return ", ".join(picked_stats)
     def assign_stats(self,func):
         self.all_stats_ordered = []
