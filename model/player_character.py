@@ -139,7 +139,9 @@ class PlayerCharacter(object):
     def show_assigned_stats(self):
         assigned_stats = []
         for stat in range(6):
-            assigned_stats.append(self.stat_blocks[stat] + ': ' + str(self.all_stats_ordered[stat]))
+            stat_name = self.stat_blocks[stat]
+            stat_num = str(self.all_stats_ordered[stat])
+            assigned_stats.append(f'{stat_name}: {stat_num}')
         return ", ".join(assigned_stats)
     def pick_race(self,func): 
         while True: 
