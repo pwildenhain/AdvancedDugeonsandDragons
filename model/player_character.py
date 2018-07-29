@@ -108,9 +108,7 @@ class PlayerCharacter(object):
                 except ValueError: 
                     func(f'Whoops, integers only please. Enter a number for {stat}: ')
                     continue
-        self.all_stats = self.all_stats_ordered 
-
-        return ", ".join(picked_stats)
+        self.all_stats = self.all_stats_ordered
     def assign_stats(self,func):
         self.all_stats_ordered = []
         all_stats_unordered = list(self.all_stats)
@@ -198,14 +196,20 @@ class PlayerCharacter(object):
     def check_racesex_lim(self,func):
         self.has_limit = False
         for stat in range(6):
+            stat_score = self.stats_chosen_dict[self.stat_blocks[stat]]
+            stat_lim = self.racesex_limits[self.race][self.stat_blocks[stat]]
+            race = self.race.capitalize()
+            stat = self.stat_names[stat]
             if stat == 0:
-                if self.stats_chosen_dict[self.stat_blocks[stat]] not in self.racesex_limits[self.race][self.stat_blocks[stat]][self.sex]:
-                    func(self.sex.capitalize() + ' ' + self.race.capitalize() + ' ' + self.stat_names[stat] + ' techincally can\'t be ' + str(self.stats_chosen_dict[self.stat_blocks[stat]]))
+                strength_lim = self.racesex_limits[self.race][self.stat_blocks[stat]][self.sex]
+                if stat_score not in strength_lim:
+                    sex = self.sex.capitalize()
+                    func(f"{sex} {race} {stat}  techincally can't be " + str(strength_score))
                     sleep(0.5)
                     self.has_limit = True
             else:
-                if self.stats_chosen_dict[self.stat_blocks[stat]] not in self.racesex_limits[self.race][self.stat_blocks[stat]]:
-                    func(self.race.capitalize() + ' ' + self.stat_names[stat] + ' techincally can\'t be ' + str(self.stats_chosen_dict[self.stat_blocks[stat]]))
+                if stat_score not in stat_lim:
+                    func(f"{race} {stat}  techincally can't be " + str(stat_score))
                     sleep(0.5)
                     self.has_limit = True
     def racesex_lim_loop(self,func):
