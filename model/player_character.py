@@ -116,8 +116,10 @@ class PlayerCharacter(object):
         all_stats_unordered = list(self.all_stats)
         stat = 0
         # Check to make sure all the values in all_stats_unordered are unique
-        while all(x==all_stats_unordered[0] for x in all_stats_unordered)==False:
-            func('Pick a number for ' + self.stat_names[stat] + ': ' + ", ".join([str(num) for num in all_stats_unordered]))
+        while all(x == all_stats_unordered[0] for x in all_stats_unordered) == False:
+            stat_name = self.stat_names[stat]
+            available_stats = ", ".join([str(num) for num in all_stats_unordered])
+            func(f'Pick a number for {stat_name}: {available_stats}')
             while True:
                 try:
                     choice = int(input())
@@ -126,10 +128,10 @@ class PlayerCharacter(object):
                         all_stats_unordered.remove(choice)
                         break 
                     else:
-                        func('I don\'t see that number. Choose ' + self.stat_names[stat] + ' from these values:' + ", ".join([str(num) for num in all_stats_unordered]))
+                        func(f"I don't see that number. Choose {stat_name} from these values: {available_stats}")
                         continue
                 except ValueError:
-                    func('Numbers only please. Choose ' + self.stat_names[stat] + ' from these values:' + ", ".join([str(num) for num in all_stats_unordered]))
+                    func(f'Numbers only please. Choose {stat_name} from these values: {available_stats}')
                     continue
                 # Move on to next stat
             stat = stat + 1
