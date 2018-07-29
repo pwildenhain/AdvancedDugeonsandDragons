@@ -93,19 +93,20 @@ class PlayerCharacter(object):
         # Empty the list in case there are previous results
         self.all_stats_ordered = []
         for stat in range(6):
+            stat = self.stat_names[stat]
             # stat_names exists in charSheetGlobals for reference
-            func('Enter a number for ' + self.stat_names[stat] + ': ')
+            func(f'Enter a number for {stat}: ')
             while True:
                 try: 
                     choice = int(input())
                     if choice not in range(3,26):
-                        func('Just integers between 3 and 25 for now. Enter a number for ' + self.stat_names[stat] + ': ')
+                        func(f'Just integers between 3 and 25 for now. Enter a number for {stat}: ')
                         continue
                     else:
                         self.all_stats_ordered.append(choice)
                         break
                 except ValueError: 
-                    func('Whoops, integers only please. Enter a number for ' + self.stat_names[stat] + ': ')
+                    func(f'Whoops, integers only please. Enter a number for {stat}: ')
                     continue
         self.all_stats = self.all_stats_ordered 
     def show_picked_stats(self):
