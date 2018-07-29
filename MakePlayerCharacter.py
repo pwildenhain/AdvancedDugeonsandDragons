@@ -23,12 +23,19 @@ while not answer in ['yes','no']:
 if answer == 'yes':
 	type_it('Ok, here we go!')
 	print('*Fingers crossed*')
-	redo_loop(NewCharacter.roll_stats,'Want to keep these numbers?',show_func = NewCharacter.show_rolled_stats)
-	redo_loop(partial(NewCharacter.assign_stats,type_it),'Are these choices correct?',show_func = NewCharacter.show_assigned_stats)
+	redo_loop(NewCharacter.roll_stats,'Want to keep these numbers?',
+	show_func = NewCharacter.show_rolled_stats)
+	redo_loop(
+		partial(NewCharacter.assign_stats,type_it),
+		'Are these choices correct?',
+		show_func = NewCharacter.show_assigned_stats)
 elif answer == 'no':
 	type_it('Sounds good.')
 	type_it('Enter below and don\'t adjust for race, we\'ll handle that next.')
-	redo_loop(partial(NewCharacter.pick_stats,type_it),'Are these the numbers you want?',show_func = NewCharacter.show_picked_stats)
+	redo_loop(
+		partial(NewCharacter.pick_stats,type_it),
+		'Are these the numbers you want?',
+		show_func = NewCharacter.show_assigned_stats)
 sleep(0.5)
 type_it('Awesome. Now let\'s choose a race.')
 sleep(0.5)
