@@ -203,7 +203,7 @@ class PlayerCharacter(object):
                 strength_lim = self.racesex_limits[self.race][self.stat_blocks[stat]][self.sex]
                 if stat_score not in strength_lim:
                     sex = self.sex.capitalize()
-                    func(f"{sex} {race} {stat}  techincally can't be " + str(stat_score))
+                    func(f"{sex} {race} {stat} techincally can't be " + str(stat_score))
                     sleep(0.5)
                     self.has_limit = True
             else:
